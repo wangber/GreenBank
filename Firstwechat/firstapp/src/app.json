@@ -1,0 +1,37 @@
+{
+    "pages": [
+        "pages/index/main",
+        "pages/second/main",
+        "pages/yuyue/main",
+        "pages/paihang/main"
+
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "WeChat",
+        "navigationBarTextStyle": "black"
+    },
+    "tabBar": {
+        "list": [{
+                "pagePath": "pages/index/main",
+                "text": "美句赏析"
+            },
+            {
+                "pagePath": "pages/second/main",
+                "text": "我要贡献"
+
+            },
+            {
+                "pagePath": "pages/yuyue/main",
+                "text": "我要预约"
+            },
+            {
+                "pagePath": "pages/paihang/main",
+                "text": "排行榜"
+            }
+
+        ]
+    }
+
+}
