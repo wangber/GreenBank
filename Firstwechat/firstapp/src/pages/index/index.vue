@@ -41,6 +41,18 @@ export default {
   },
   mounted(){
     console.log('页面已经载入，你的请求有没有执行呢？')
+    wx.getUserInfo({
+      success: function(res){
+        console.log(res.data)
+        // success
+      },
+      fail: function() {
+        // fail
+      },
+      complete: function() {
+        // complete
+      }
+    })
     this.getData()
   }
   ,
