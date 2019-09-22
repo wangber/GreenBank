@@ -27,8 +27,10 @@ def get_onejuzi(request):
           else:
                sen = '抱歉这个句子貌似失踪了2'
      except:
-          sen = '抱歉这个句子貌似失踪了3'
+          sen = '抱歉这个句子貌似失踪了error：3'
      return Response(sen)
+
+
 
      
      

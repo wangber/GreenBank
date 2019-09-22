@@ -3,7 +3,8 @@
         "pages/index/main",
         "pages/second/main",
         "pages/yuyue/main",
-        "pages/paihang/main"
+        "pages/paihang/main",
+        "pages/mine/main"
 
     ],
     "window": {
@@ -15,7 +16,7 @@
     "tabBar": {
         "list": [{
                 "pagePath": "pages/index/main",
-                "text": "美句赏析"
+                "text": "首页"
             },
             {
                 "pagePath": "pages/second/main",
@@ -29,6 +30,10 @@
             {
                 "pagePath": "pages/paihang/main",
                 "text": "排行榜"
+            },
+            {
+                "pagePath": "pages/mine/main",
+                "text": "我的"
             }
 
         ]
