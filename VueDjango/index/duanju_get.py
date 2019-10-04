@@ -40,6 +40,7 @@ def get_onesen(url,type):
 def juzi_api(order):
     type,url= get_type(order)
     sen = get_onesen(url,type)
+    print("url")
     return sen
 
 

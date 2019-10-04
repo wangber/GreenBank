@@ -1,6 +1,7 @@
 from django.urls import path,include
-from apitest.views import get_user
+from apitest.views import AuthView,CreateCode
 urlpatterns = [
-    path('all_user',get_user),
+    path('auth',AuthView.as_view()),
+    path('getcode',CreateCode.as_view()),
 ]
 
