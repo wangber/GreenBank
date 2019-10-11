@@ -62,7 +62,6 @@ class CreateCode(APIView):
         except Exception as e:
             pass
         return JsonResponse(ret)    
-
      
 #获取用户的信息
 

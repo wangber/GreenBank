@@ -30,7 +30,6 @@
 import ClickCounter from "@/components/click-counter";
 
 export default {
-  //声明在当前组件下使用 counter-click 组件
   data() {
     return {
       msg: "Hello",

@@ -1,13 +1,20 @@
 <template>
 <div>
-  <div>
-<p>回收志愿者会提供专门的二维码扫描二维码既可以记录你的成绩</p>
+  <div v-if="no_login">
+    <p>你还未登录，前往“我的”页面去登录信息吧！</p>
+    <button @click="Seestore">查看缓存</button>
+
   </div>
-  <div id="action">
+  <div v-else>
+    <div>
+     <p>回收志愿者会提供专门的二维码扫描二维码既可以记录你的成绩</p>
+     </div>
+    <div id="action">
      <button @click="touru()">点击扫码投入</button>
-  </div>
-  <div id="alert">
-    <mp-modal ref="mpModal" :title="msg" :content="msg_2+num" :showCancel="false" @confirm="confirm"></mp-modal>
+     </div>
+     <div id="alert">
+      <mp-modal ref="mpModal" :title="msg" :content="msg_2+num" :showCancel="false" @confirm="confirm"></mp-modal>
+     </div>
   </div>
 </div>
 
@@ -27,10 +34,60 @@ export default {
     return {
       msg: "投入成功",
       msg_2: "你已经成功投入",
-      num: "123"
+      num: "123",
+      token:'',
+      no_login:true
     };
   },
+
+  mounted() {
+   this.onLoad();
+  },
+
   methods: {
+    
+    onLoad:function(){
+      let _this = this
+      wx.getStorage({
+        key: 'token',
+        success: function(res){
+          console.log("缓存获取情况")
+          console.log(res)
+          if (res.data != ""){
+            _this.no_login = res.data
+          }
+          // success
+        },
+        fail: function() {
+          console.log("缓存获取失败")
+          // fail
+        },
+        complete: function() {
+          // complete
+        }
+      })
+    },
+    Seestore:function(){
+        wx.getStorage({
+        key: 'token',
+        success: function(res){
+          console.log("缓存获取情况")
+          console.log(res)
+          if (res.data != ""){
+            _this.no_login = false
+          }
+          // success
+        },
+        fail: function() {
+          console.log("缓存获取失败")
+          // fail
+        },
+        complete: function() {
+          // complete
+        }
+      })
+    },
+
     back: function() {
       wx.navigateBack({
         delta: 1, // 回退前 delta(默认为1) 页面
@@ -58,7 +115,9 @@ export default {
           //向链接发送请求
           wx.request({
             url: res.result,
-            data: {},
+            data: {
+
+            },
             method: "GET", // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
             // header: {}, // 设置请求的 header
             success: function(res) {

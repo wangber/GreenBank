@@ -22,5 +22,6 @@ urlpatterns = [
     path('index/api',api.indexData),
     path('index/api/getjuzi',api.get_onejuzi),
     path('apitest/',include('apitest.urls')),
+    path('api/',include('index.urls')),
     path('',index),
 ]

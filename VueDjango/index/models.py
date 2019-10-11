@@ -16,12 +16,12 @@ class History(models.Model):
 #创建一个用户模型
 class MyUser(models.Model):
     
-    open_id = models.CharField(max_length=100,unique=True,verbose_name="用户id")
+    open_id = models.CharField(max_length=100,unique=True,verbose_name="用户open_id")
     nickname = models.CharField(max_length=30,verbose_name="用户昵称",default="未知昵称")
     location = models.CharField(max_length=30,default="宿舍信息尚未填写",verbose_name="宿舍楼栋与宿舍号")
     all_touru = models.IntegerField(verbose_name='所有投入',default=0)
     level = models.CharField(max_length=20,verbose_name="环保等级",default="热心环保")
-    history = models.ForeignKey(History,related_name="user_touru",on_delete=models.CASCADE)
+    
     user_type_choices =(
         (1,"普通用户"),
         (2,"志愿者"),
@@ -40,5 +40,13 @@ class MyUser(models.Model):
 class Token(models.Model):
     open_id = models.CharField(max_length=100,unique=True,verbose_name="用户id")
     token = models.CharField(max_length=100,verbose_name="登录token") 
+
+
+#预约表
+class Yuyue(models.Model):
+    location = models.CharField(max_length=30,verbose_name="预约地址")
+    yuyuetime = models.DateTimeField(auto_now=True,verbose_name="预约时间")
+    def __str__(self):
+        return self.location
 
 # Create your models here.

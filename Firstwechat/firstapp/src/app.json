@@ -4,7 +4,9 @@
         "pages/second/main",
         "pages/yuyue/main",
         "pages/paihang/main",
-        "pages/mine/main"
+        "pages/mine/main",
+        "pages/get-QR/main"
+
 
     ],
     "window": {

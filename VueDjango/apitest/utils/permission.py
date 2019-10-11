@@ -4,6 +4,6 @@ from rest_framework.permissions import BasePermission
 class Mypermission(BasePermission):
     message = "这个功能需要是志愿者才能使用哦"
     def has_permission(self,request,view):
-        if request.user.user_type !=3:
+        if request.user.user_type !=2:
             return False
         return True
