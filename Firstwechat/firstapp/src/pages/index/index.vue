@@ -1,7 +1,7 @@
 <template>
   <div class="container" @click="clickHandle">  
     <div id="index">
-      <h1>欢迎来欣赏一个短短句~</h1>
+      <h1>欢迎了解绿色银行，首页我们为你准备了一个欣赏短短句的好工具哦</h1>
     </div>
     <div id="type">
       <button @click="getOnesen(1)">爱情语句</button>
@@ -16,6 +16,16 @@
   </div>
 </template>
 <style scoped>
+h1{
+  background-image: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);
+  margin:20px;
+  border: 0px solid;
+  border-radius: 5px;
+
+}
+button{
+  background:#8fd3f4
+  }
 #type {
   padding: 10px;
 }
@@ -107,7 +117,6 @@ export default {
   color: black;
   padding: 10px;
   margin: 15px;
-  background: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1568109940005&di=b9575467da45ec66d9be1d2019032ab6&imgtype=0&src=http%3A%2F%2Fimage1.wulinsoso.com%2Fhdpic%2F16sucai%2F2014%2F03%2F07%2F201918533.jpg);
-  background-size: cover;
+  background-image: linear-gradient(-225deg, #69EACB 0%, #EACCF8 48%, #6654F1 100%);
 }
 </style>

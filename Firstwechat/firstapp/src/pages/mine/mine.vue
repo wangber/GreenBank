@@ -1,31 +1,87 @@
 <template>
 <div id="main">
-  <div v-if="no_login">
+  <div v-if="no_login" class="loginbutton">
+       <h1>为了方便你的信息统计，需要登录才能进行相关操作哦</h1>
        <button open-type="getUserInfo" @getuserinfo="bindGetUserInfo">点击登录</button>
-       <img id="test" src="data:image/jpg;base64,iVBORw0KGgoAAAANSUhEUgAAAQUAAAEFAQAAAADC7c88AAABaUlEQVR4nO2ZQW6DMBBF38SRyI7cgNwkR+lRwtHCTegNYFGJSIHfhUNUKpJ2BViav8LWW3yNbPgzmHiv2+4PAJxwwgknVidaizpBbwbVY10u7CMhIpMkXWltD1ZSSJKW95EQ0ccTlXdhQCW0ZrspsYyPNIl4Gdf3sVFiP11mtyColveRHBGkeBmzPl5PaVjDRwJEPGM3A6Ag+woy+LSlfaRD2KRLao/YMAW8S3pJmJkVHWBlZUeQreMjCaI1M4Nz/dg8q6Hf4Ql2VpLUZBqQruS6g3Qt1AVFdVtxuhXiZ8VUAyZJdYyyXrE5SVLz/AJk8YyND16xGWmiLgzAuc67IHHxir0gnrOL9oBJZXVqD733le+IcXYRW3JJTXYHlUv7SIjox2kYJqhOeYd8PvYPIh/fYyv72DLxa3ZBvxtE9VETxvZpK063Qox5TIrBFRMXz2Pv9MhjADyjfh3Xni5mZP6H1wknnEic+Abm+t9w7DtC0gAAAABJRU5ErkJggg==">
   </div>
   <div v-else>
-    <p>成功登录</p>
+    <!-- <p>成功登录</p> -->
     <div id="user_info">
     <img :src="user_img" alt="">
-    <p>用户昵称：{{ user_nickname }}</p>
-    <p>总投入：{{ user_touru }}</p>
-    <p>你的环保头衔：{{ user_touxian }}</p>
-      <div v-if="no_join">
-        <button @click="Input_info_to_db">点击提供你的信息给我们</button>
+    <p class="nick">{{ user_nickname }}</p>
+      <div v-if="no_join" class="to_join">
+        <p><span><button @click="Input_info_to_db">点击此处</button></span><span>确认加入我们或者获取你的环保信息</span></p> 
       </div>
-      <div v-else>
-       <p>你的信息已经提供</p>
-       <!-- <button @click="GetCode">请求一个二维码</button> -->
-        <button @click="ToGetPage">请求一个二维码</button>
-      </div>
+      <div v-else class="action">
+            <div class="huanbao">
+              <p>总投入：{{ user_touru }}</p>
+              <p>你的环保头衔：{{ user_touxian }}</p>
+              <p>你已经成为一名优秀的环保爱好者!感谢你对我们活动的支持^_^</p>
+            </div>
+          <!-- 管理员的请求二维码权限 -->
+          <div v-if="user_type==2">
+            <button @click="ToGetPage">请求一个二维码</button>
+            <button @click="ToSeeyuyue">点击查看本周预约</button>
+          </div>       
+          <div class="button_any">
 
+              <li><mp-button type="primary" size="normal" btnClass="mb15" @click="To_touru">我要投入</mp-button></li>
+              <li><mp-button type="primary" size="normal" btnClass="mb15" @click="To_yuyue">我要预约</mp-button></li>
+              
+            </div>
+      </div>
     </div>
+    
   </div>
-  
-
 </div>   
 </template>
+<style>
+.loginbutton{
+  padding:100px;
+}
+.loginbutton>h1{
+  text-align: center
+}
+#user_info{
+  border: 1px solid #23a9f2;
+  margin-top:50px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-radius: 5px;
+  padding: 20px;
+}
+.nick{
+  float: left;
+  padding-left: 30px;
+  padding-top: 20px;
+  font-size: 25px;
+  font-family: 'KaiTi_GB2312' 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.to_join{
+  clear: both;
+}
+.action{
+  clear: both;
+
+}
+.huanbao{
+  clear: both;
+  border: 5px solid #fffbe5;
+  border-radius: 10px;
+  box-shadow: 10px 5px #bacf98; 
+  margin: 20px 0px 20px 0px;
+}
+/* 投入和预约 */
+.button_any{
+  padding-left: 20px;
+  margin-left: 20px;
+}
+.button_any>li{
+  float: left;
+  margin-left: 20px;
+  margin-top: 30px;
+}
+</style>
 <script>
 import mpInput from "mpvue-weui/src/input";
 import mpModal from "mpvue-weui/src/modal";
@@ -49,7 +105,8 @@ export default {
       no_login:true,
       no_join:true,
       user_openid:"默认id",
-      token:''
+      token:'',
+      user_type:1
     };
   },
   methods: {
@@ -116,7 +173,8 @@ export default {
         data: {
           
           user_openid : _this.user_openid,
-          user_nickname : _this.user_nickname
+          user_nickname : _this.user_nickname,
+          user_img :_this.user_img
         },
         method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
         header: {
@@ -124,7 +182,7 @@ export default {
         }, // 设置请求的 header
         success: function(res){
           _this.no_join = false
-          // console.log(res)
+          console.log(res)
         },
         fail: function() {
           console.log("写入失败")
@@ -135,7 +193,7 @@ export default {
       });
       //认证——获取token
       wx.request({
-        url: 'http://127.0.0.1:8000/apitest/auth',
+        url: 'http://127.0.0.1:8000/api/auth/',
         data: {
           open_id:_this.user_openid
         },
@@ -144,15 +202,19 @@ export default {
           'content-type': 'application/x-www-form-urlencoded'
         }, // 设置请求的 header
         success: function(res){
+          console.log(res.data)
           _this.token = res.data.token
+          _this.user_type = res.data.user_type
+          _this.user_touru = res.data.all_touru
+          _this.user_touxian = res.data.level
           //成功之后直接将token写入缓存
           wx.setStorage({
             key: 'token',
             data: _this.token,
             success: function(res){
-              console.log(res)
+            //  console.log(res)
               console.log("token已经写入缓存中")
-              console.log("写入的是："+_this.token)
+              // console.log("写入的是："+_this.token)
           // success
             },
             fail: function() {
@@ -188,8 +250,6 @@ export default {
         }
       }) 
     },
-
-    
     ToGetPage:function(){
       let _this = this
       wx.navigateTo({
@@ -208,6 +268,48 @@ export default {
           // complete
         }
       })
+    },
+    To_touru:function(){
+      wx.navigateTo({
+        url: '../../pages/second/main',
+        success: function(res){
+          // success
+        },
+        fail: function() {
+          // fail
+        },
+        complete: function() {
+          // complete
+        }
+      })
+    },
+    To_yuyue:function(){
+      wx.navigateTo({
+        url: '../../pages/yuyue/main',
+        success: function(res){
+          // success
+        },
+        fail: function() {
+          // fail
+        },
+        complete: function() {
+          // complete
+        }
+      })
+    },
+    ToSeeyuyue:function(){
+      wx.navigateTo({
+        url: '../../pages/seeyuyue/main',
+        success: function(res){
+          // success
+        },
+        fail: function() {
+          // fail
+        },
+        complete: function() {
+          // complete
+        }
+      })
     }
   }
 };
@@ -217,9 +319,11 @@ export default {
 div#user_info>img{
   width:100px;
   height: 100px;
+  float: left;
 }
 #test{
   width:100px;
   height:100px;
 }
+
 </style>

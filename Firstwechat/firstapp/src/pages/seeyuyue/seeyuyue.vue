@@ -1,36 +1,26 @@
 <template>
-<div id="main">
-  <div v-if="no_get">
-    <button @click="Getform">点击查看排行榜</button>
-  </div>
-  <div v-else>
-    <h1>累计贡献排行榜</h1>
-    <p>更新时间：{{time}}</p>
-    <!-- 实现滑动 -->
-          <!-- <scroll-view class='scroll-view-list-vertical' scroll-y="true">
-            <div class="scroll-view-item-vertical" :key="key" v-for="(idx, key) in iconMap">
-              <img :src="iconImg" alt="" :style="{background: iconMap[key]['bk']}">
-              <span>{{iconMap[key]['title']}}</span>
-            </div>
-          </scroll-view>  -->
-    <!-- 实现滑动 -->
-          <div class="usertext">
-           
+<div class="main">
+    <div v-if="no_see">
+        <button @click="See">点击查看预约</button>
+    </div>
+    <div class="list" v-else>
+        <h1>预约情况</h1>
+    <p>更新时间：{{old_time}}----{{new_time}}</p>
+          <div class="usertext">          
           </div>
           <scroll-view class='scroll-view-list-vertical' scroll-y="true">
-            <div class="scroll-view-item-vertical" v-for="(key,idx) in alluser">
+            <div class="scroll-view-item-vertical" v-for="(key,idx) in yuyuelist">
               <!-- <img :src="iconImg" alt="图片未加载" :style="{background:#8B67E5}"> -->
-              <img :src=key.user_img alt="">
-              <div class="usertext">
-                <span>{{key.nickname}}</span><span>{{key.all_touru}}</span><span>{{key.level}}</span>
+              <div class="yuyuetext">
+                <span>{{key.location}}</span><span>{{key.yuyuetime}}</span>
               </div>
-            
             </div>
           </scroll-view> 
-  </div>
-  
-</div>   
+    </div>
+
+</div>
 </template>
+
 <style>
 h1{
   text-align: center;
@@ -68,7 +58,7 @@ span {
             padding: 5px;    
         }
 
-        
+
 </style>
 <script>
 import mpInput from "mpvue-weui/src/input";
@@ -81,33 +71,46 @@ export default {
     mpModal,
     mpInput
   },
-  config:{
-    enablePullDownRefresh:true
-  },
   data() {
     return {
-     alluser:'',
-     no_get:true,
-     user_img:'',
-     time:''
+     old_time:'',
+     new_time:'',
+     yuyuelist:'',
+     no_see:true
     };
   },
   methods: {
-    Getform:function(){
-      let _this = this;
-      wx.request({
-        url: 'http://127.0.0.1:8000/api/paihang',
-        data: {},
-        method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-        // header: {}, // 设置请求的 header
+      See:function(){
+          let _this = this
+          wx.request({
+              url: 'http://127.0.0.1:8000/api/seeyuyue',
+              data: {},
+              method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+              // header: {}, // 设置请求的 header
+              success: function(res){
+                  _this.no_see = false
+                  _this.yuyuelist = res.data.ret_list
+                  _this.old_time = res.data.old_time
+                  _this.new_time = res.data.last_time
+                  // success
+              },
+              fail: function() {
+                  // fail
+              },
+              complete: function() {
+                  // complete
+              }
+          })
+      },
+      back:function(){
+      wx.switchTab({
+        url: '/pages/index/main',
         success: function(res){
+          console.log("跳转成功返回信息"+res)
           // success
-          _this.alluser = res.data.alluser
-          _this.time = res.data.time
-          console.log(_this.time)
-          _this.no_get = false
         },
         fail: function() {
+          console.log("跳转失败")
           // fail
         },
         complete: function() {
@@ -115,6 +118,7 @@ export default {
         }
       })
     }
+    
   }
 };
 </script>

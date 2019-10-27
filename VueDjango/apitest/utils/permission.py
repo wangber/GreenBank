@@ -7,3 +7,4 @@ class Mypermission(BasePermission):
         if request.user.user_type !=2:
             return False
         return True
+

@@ -2,20 +2,33 @@
 <div id="main">
   
   <div v-if="no_code">
-    <div>
-        <p>请输入投入数量：</p>
+    <div class="get_num">
+        <h2>请输入投入数量:</h2>
         <input class="yuyue" id="code" type="text" width=50% height="50px" confirm-type="done" v-model="touru_num">
+        <mp-modal ref="mpModal" title='请求失败' content="请检查输入" :showCancel="false" @confirm="confirm"></mp-modal>
         <button @click="GetCode">确认</button>
     </div>
   </div>
-  <div v-else>
-    <p>请投入者扫码：{{ touru_num }}</p>
-      <img :src="img_url" alt="">
-     <button @click="Back">返回</button>
-     
+  <div class="scan_code" v-else>
+    <h2>请投入者扫码：{{ touru_num }}</h2>
+        <div class="code"><li class="er_code"><img :src="img_url" alt="二维码" class="code"></li></div>
+    <button @click="Back">返回</button>
+
   </div>
 </div>   
 </template>
+<style>
+h2{
+  font-size: 30px;
+  text-align: center
+}
+input{
+  margin: 20px;
+  padding: 20px;
+  font-size: 30px;
+}
+
+</style>
 <script>
 import mpInput from "mpvue-weui/src/input";
 import mpModal from "mpvue-weui/src/modal";
@@ -53,10 +66,15 @@ export default {
     GetCode:function(){
       let _this = this
       console.log("修改后的token:"+_this.token)
-      wx.request({
+      if(_this.touru_num == ''){
+        this.$refs.mpModal.show();
+      }
+      else{
+          wx.request({
         url: 'http://127.0.0.1:8000/api/createcode/?token='+_this.token,
         data: {
-          token:_this.token
+          token:_this.token,
+          num:_this.touru_num
         },
         method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
         // header: {}, // 设置请求的 header
@@ -74,6 +92,7 @@ export default {
           // complete
         }
       })
+      }
     },
 
     Back:function(){
@@ -103,4 +122,17 @@ export default {
   border: 2px solid #0a1016;
   border-radius: 2px;
 }
+.get_num{
+  margin: 5px;
+  padding: 5px;
+}
+.scan_code{
+  margin: 5px;
+  padding: 5px;
+}
+.code{
+      width: 100%;
+      text-align: center
+}
+
 </style>

@@ -5,37 +5,38 @@
         "pages/yuyue/main",
         "pages/paihang/main",
         "pages/mine/main",
-        "pages/get-QR/main"
+        "pages/get-QR/main",
+        "pages/msg/main",
+        "pages/seeyuyue/main"
 
 
     ],
     "window": {
         "backgroundTextStyle": "light",
+        
         "navigationBarBackgroundColor": "#fff",
         "navigationBarTitleText": "WeChat",
-        "navigationBarTextStyle": "black"
+        "navigationBarTextStyle": "black",
+        "backgroundcolor":"blue"
     },
     "tabBar": {
         "list": [{
                 "pagePath": "pages/index/main",
-                "text": "首页"
-            },
-            {
-                "pagePath": "pages/second/main",
-                "text": "我要贡献"
-
-            },
-            {
-                "pagePath": "pages/yuyue/main",
-                "text": "我要预约"
+                "text": "首页",
+                "iconPath":"static/icon/home.png",
+                "selectedIconPath": "static/icon/xuanzhong.png"
             },
             {
                 "pagePath": "pages/paihang/main",
-                "text": "排行榜"
+                "text": "排行榜",
+                "iconPath":"static/icon/paihang.png",
+                "selectedIconPath": "static/icon/xuanzhong.png"
             },
             {
                 "pagePath": "pages/mine/main",
-                "text": "我的"
+                "text": "我的",
+                "iconPath":"static/icon/mine.png",
+                "selectedIconPath": "static/icon/xuanzhong.png"
             }
 
         ]

@@ -1,14 +1,30 @@
 <template>
 <div id="main">
-  <p>请输入宿舍号：</p>
+  <h1>请输入预约宿舍号：</h1>
     <input type="text" id="yuyue" class="yuyue" width=50% height="50px" confirm-type="done" v-model="yuyue_location">
     <mp-modal ref="mpModal" :title="su" :content="su_msg" :showCancel="false" @confirm="confirm"></mp-modal>
-    <mp-button type="primary" size="normal" btnClass="mb15" @click="back()">返回首页</mp-button>
-    <mp-button type="primary" size="normal" btnClass="mb15" @click="sendlocation()">提交预约</mp-button>
+    <li><mp-button type="primary" size="normal" btnClass="mb15" @click="back()">返回首页</mp-button></li>
+    <li><mp-button type="primary" size="normal" btnClass="mb15" @click="sendlocation()">提交预约</mp-button></li>
 </div>
     
      
 </template>
+<style>
+h1{
+  font-size: 30px;
+  text-align: center
+}
+input{
+  margin: 20px;
+  padding: 20px;
+  font-size: 20px;
+}
+li{
+  float: left;
+  margin-left: 20px;
+  margin-top: 30px;
+}
+</style>
 <script>
 import mpInput from "mpvue-weui/src/input";
 import mpModal from "mpvue-weui/src/modal";
@@ -37,8 +53,6 @@ export default {
               this.$refs.mpModal.show();
       }
       else{
-        this.su="预约成功"
-        this.su_msg="我们将会在回收当晚到达你的宿舍，为避免打扰，有不方便的情况请提前和我们联系哦(*^▽^*)"
         let _this = this
         wx.request({
           url: 'http://127.0.0.1:8000/api/yuyue/',
@@ -51,16 +65,27 @@ export default {
           }, // 设置请求的 header
           success: function(res){
             console.log("预约地址填写："+res.data)
+            wx.navigateTo({
+              url: '../msg/main',
+              success: function(res){
+                // success
+              },
+              fail: function() {
+                // fail
+              },
+              complete: function() {
+                // complete
+              }
+            })
           },
           fail: function() {
-            _this.su="预约失败"
-            _this.su_msg="请检查你的输入，之后再次预约，谢谢你的支持！"
+            this.$refs.mpModal.show();
           },
           complete: function() {
             // complete
           }
         })
-        this.$refs.mpModal.show();
+        
       }
     },
     back:function(){

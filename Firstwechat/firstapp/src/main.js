@@ -12,6 +12,7 @@ export default {
         pages: [
             'pages/index/main',
             'pages/second/main'
-        ]
+        ],
+        enablePullDownRefresh:true
     }
 }
