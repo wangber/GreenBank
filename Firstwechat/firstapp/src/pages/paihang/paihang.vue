@@ -14,8 +14,7 @@
             </div>
           </scroll-view>  -->
     <!-- 实现滑动 -->
-          <div class="usertext">
-           
+          <div class="usertext">           
           </div>
           <scroll-view class='scroll-view-list-vertical' scroll-y="true">
             <div class="scroll-view-item-vertical" v-for="(key,idx) in alluser">

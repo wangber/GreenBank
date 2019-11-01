@@ -5,7 +5,7 @@
     </div>
     <div class="list" v-else>
         <h1>预约情况</h1>
-    <p>更新时间：{{old_time}}----{{new_time}}</p>
+    <p>预约时间段：{{old_time}}----{{new_time}}</p>
           <div class="usertext">          
           </div>
           <scroll-view class='scroll-view-list-vertical' scroll-y="true">

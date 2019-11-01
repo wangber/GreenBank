@@ -8,7 +8,10 @@
     <!-- <p>成功登录</p> -->
     <div id="user_info">
     <img :src="user_img" alt="">
-    <p class="nick">{{ user_nickname }}</p>
+    <div class="nick">
+        <p1>{{ user_nickname }}</p1>
+    </div>
+    
       <div v-if="no_join" class="to_join">
         <p><span><button @click="Input_info_to_db">点击此处</button></span><span>确认加入我们或者获取你的环保信息</span></p> 
       </div>
@@ -50,12 +53,15 @@
   border-radius: 5px;
   padding: 20px;
 }
-.nick{
-  float: left;
-  padding-left: 30px;
-  padding-top: 20px;
+.nick>p1{
+  float:left;
+  margin-left: 20px;
   font-size: 25px;
+  background-image: linear-gradient(to top, #fddb92 0%, #d1fdff 100%); 
   font-family: 'KaiTi_GB2312' 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.nick>p2{
+  clear: both;
 }
 .to_join{
   clear: both;
@@ -68,7 +74,6 @@
   clear: both;
   border: 5px solid #fffbe5;
   border-radius: 10px;
-  box-shadow: 10px 5px #bacf98; 
   margin: 20px 0px 20px 0px;
 }
 /* 投入和预约 */
@@ -128,7 +133,7 @@ export default {
             //header: {}, // 设置请求的 header
             success: function(res) {
               console.log("请求结果");
-              // console.log(res);
+              console.log(res);
               _this.user_openid = res.data.openid
               _this.no_login=false;
               // success
@@ -153,6 +158,7 @@ export default {
       wx.getUserInfo({
         success: function(res) {
           console.log("获得用户信息");
+          console.log(res)
           _this.user_img = res.userInfo.avatarUrl
           _this.user_nickname = res.userInfo.nickName
           // success
@@ -320,6 +326,7 @@ div#user_info>img{
   width:100px;
   height: 100px;
   float: left;
+  border-radius: 50%;
 }
 #test{
   width:100px;

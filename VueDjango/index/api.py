@@ -214,7 +214,7 @@ class Paihang(APIView):
           #找出最新的更新时间
           ret['alluser'] = ret_user
           new_time = History.objects.last()
-          ret["time"] = new_time.date
+          ret["time"] = str(new_time.date).split(" ")[0]
           return JsonResponse(ret)
 #查看预约
 import datetime

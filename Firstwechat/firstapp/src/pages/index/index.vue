@@ -13,6 +13,7 @@
       <p>{{juzi}}</p>
       <p><small>所有句子均来自短文学网https://www.duanwenxue.com/</small> </p>
     </div>
+    
   </div>
 </template>
 <style scoped>
@@ -28,9 +29,10 @@ button{
   }
 #type {
   padding: 10px;
+  margin: 20px;
 }
 #type > button {
-  margin-top: 10px;
+  margin-top: 20px;
 }
 #juzi > p > small {
   font-size: 10px;
@@ -44,7 +46,7 @@ export default {
     return {
       msg: "Hello",
       get_data: "onedata",
-      juzi: "请求一个句子吧！",
+      juzi: "欣赏一个句子吧！",
       order: 1,
       user_jscode:''
     };
