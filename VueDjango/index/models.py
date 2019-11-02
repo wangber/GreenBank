@@ -50,5 +50,6 @@ class Yuyue(models.Model):
         return self.location
     class Meta:
         ordering = ['yuyuetime']
+        verbose_name_plural = "预约情况"
 
 # Create your models here.

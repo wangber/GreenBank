@@ -122,20 +122,18 @@ export default {
           _this.user_jscode = res.code;
           console.log("登录成功");
           wx.request({
-            url: "https://api.weixin.qq.com/sns/jscode2session",
+            url: "http://127.0.0.1:8000/api/weixinapi/",
             data: {
-              appid: "wx36c1cdf40194e860",
-              secret: "061e1a2c2c4415fb07b1a13ca286e425",
-              js_code: _this.user_jscode,
-              grant_type: "authorization_code"
+              js_code: _this.user_jscode,              
             },
             method: "GET", // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
             //header: {}, // 设置请求的 header
             success: function(res) {
               console.log("请求结果");
               console.log(res);
-              _this.user_openid = res.data.openid
+              _this.user_openid = res.data
               _this.no_login=false;
+              wx.hideLoading();
               // success
             },
             fail: function() {

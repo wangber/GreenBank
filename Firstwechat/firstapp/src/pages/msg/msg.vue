@@ -8,6 +8,7 @@
         
         <div class="weui-msg__tips-area">
           <p class="weui-msg__tips">感谢你的参与和支持(*￣︶￣)</p>
+          <span><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1572582737928&di=28eb04b1eeb541bd0edc7e7e367ab63c&imgtype=jpg&src=http%3A%2F%2Fimg4.imgtn.bdimg.com%2Fit%2Fu%3D3046585009%2C2309130056%26fm%3D214%26gp%3D0.jpg" alt=""></span>
           <button @click="back">返回首页</button>
 
         </div>

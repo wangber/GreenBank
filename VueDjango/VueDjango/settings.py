@@ -11,7 +11,11 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+from . import mi
 
+a=mi.get_pass()
+MY_USER= a[0]
+MY_PASS=a[1]
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -79,8 +83,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'GreenBank_db',
-        'USER':'root',
-        'PASSWORD':'yun15708749187..',
+        'USER':MY_USER,
+        'PASSWORD':MY_PASS,
         'HOST':'203.195.236.46',
         'PORT':'3306',
     }
