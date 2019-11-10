@@ -1,3 +1,4 @@
+#此次项目创建以及编译运行过程参考教程https://www.jianshu.com/p/6f8d74be3ff8
 # firstapp
 
 > A Mpvue project
@@ -13,7 +14,7 @@ cd myproject
 yarn
 
 # 开发时构建
-npm dev
+npm run dev
 
 # 打包构建
 npm build
