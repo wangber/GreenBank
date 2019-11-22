@@ -2,14 +2,18 @@
 <div id="main">
   <div v-if="no_login" class="loginbutton">
        <h1>为了方便你的信息统计，需要登录才能进行相关操作哦</h1>
-       <button open-type="getUserInfo" @getuserinfo="bindGetUserInfo">点击登录</button>
+       <button open-type="getUserInfo" @getuserinfo="bindGetUserInfo" >点击登录</button>
   </div>
   <div v-else>
     <!-- <p>成功登录</p> -->
     <div id="user_info">
     <img :src="user_img" alt="">
     <div class="nick">
+      <div class="p1">
         <p1>{{ user_nickname }}</p1>
+      </div>
+        
+        
     </div>
     
       <div v-if="no_join" class="to_join">
@@ -30,10 +34,13 @@
 
               <li><mp-button type="primary" size="normal" btnClass="mb15" @click="To_touru">我要投入</mp-button></li>
               <li><mp-button type="primary" size="normal" btnClass="mb15" @click="To_yuyue">我要预约</mp-button></li>
-              
-            </div>
-      </div>
+          </div>
+          <div id="fresh">
+                <button @click="Input_info_to_db">刷新</button>
+          </div>          
     </div>
+              
+  </div>
     
   </div>
 </div>   
@@ -53,7 +60,10 @@
   border-radius: 5px;
   padding: 20px;
 }
-.nick>p1{
+.fresh{
+  clear: both;
+}
+.p1{
   float:left;
   margin-left: 20px;
   font-size: 25px;
@@ -117,6 +127,9 @@ export default {
   methods: {
     bindGetUserInfo: function() {
       let _this = this;
+      wx.showLoading({
+              title: '正在获取',
+            })
       wx.login({
         success: function(res) {
           _this.user_jscode = res.code;
@@ -171,6 +184,9 @@ export default {
     },
 
     Input_info_to_db:function(){
+      wx.showLoading({
+              title: '请稍后',
+            })
       let _this = this;
       wx.request({
         url: 'http://127.0.0.1:8000/api/login_up/',
@@ -211,6 +227,7 @@ export default {
           _this.user_type = res.data.user_type
           _this.user_touru = res.data.all_touru
           _this.user_touxian = res.data.level
+          wx.hideLoading()
           //成功之后直接将token写入缓存
           wx.setStorage({
             key: 'token',

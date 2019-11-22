@@ -6,6 +6,7 @@
   <div v-else>
     <h1>累计贡献排行榜</h1>
     <p>更新时间：{{time}}</p>
+    <button @click="Getform">点击刷新排行榜</button>
     <!-- 实现滑动 -->
           <!-- <scroll-view class='scroll-view-list-vertical' scroll-y="true">
             <div class="scroll-view-item-vertical" :key="key" v-for="(idx, key) in iconMap">
@@ -94,6 +95,9 @@ export default {
   methods: {
     Getform:function(){
       let _this = this;
+      wx.showLoading({
+              title: '正在获取',
+            })
       wx.request({
         url: 'http://127.0.0.1:8000/api/paihang',
         data: {},
@@ -105,6 +109,7 @@ export default {
           _this.time = res.data.time
           console.log(_this.time)
           _this.no_get = false
+          wx.hideLoading();
         },
         fail: function() {
           // fail
