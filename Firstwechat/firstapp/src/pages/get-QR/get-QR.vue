@@ -82,7 +82,6 @@ export default {
           console.log(res.data.QR)
           _this.img_url = _this.img_url+res.data.QR
           _this.no_code = false
-
           // success
         },
         fail: function() {

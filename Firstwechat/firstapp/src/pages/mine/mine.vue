@@ -28,6 +28,7 @@
           <!-- 管理员的请求二维码权限 -->
           <div v-if="user_type==2">
             <button @click="ToGetPage">请求一个二维码</button>
+            <button @click="ToGetyuyuecode">点击获取一个预约码</button>
             <button @click="ToSeeyuyue">点击查看本周预约</button>
           </div>       
           <div class="button_any">
@@ -331,7 +332,23 @@ export default {
           // complete
         }
       })
-    }
+    },
+    /*
+    ToGetyuyuecode:function(){
+        wx.navigateTo({
+          url: '../../pages/yuyuecode/main',
+          success: function(res){
+            
+            // success
+          },
+          fail: function() {
+            // fail
+          },
+          complete: function() {
+            // complete
+          }
+        })
+    }*/
   }
 };
 </script>
